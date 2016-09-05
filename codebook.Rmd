@@ -1,0 +1,48 @@
+## Code Book
+
+This code book will describe the data used in this project, as well as the processing required to create the resulting tidy data set.
+
+### Overview
+
+30 volunteers performed 6 different activities while wearing a smartphone. The smartphone captured various data about their movements.
+
+### Explanation of each file
+
+* `features.txt`: Names of the 561 features.
+* `activity_labels.txt`: Names and IDs for each of the 6 activities.
+
+* `X_train.txt`: 7352 observations of the 561 features, for 21 of the 30 volunteers.
+* `subject_train.txt`: A vector of 7352 integers, denoting the ID of the volunteer related to each of the observations in `X_train.txt`.
+* `y_train.txt`: A vector of 7352 integers, denoting the ID of the activity related to each of the observations in `X_train.txt`.
+
+* `X_test.txt`: 2947 observations of the 561 features, for 9 of the 30 volunteers.
+* `subject_test.txt`: A vector of 2947 integers, denoting the ID of the volunteer related to each of the observations in `X_test.txt`.
+* `y_test.txt`: A vector of 2947 integers, denoting the ID of the activity related to each of the observations in `X_test.txt`.
+
+##Transformations
+
+Following are the transformations that were performed on the input dataset:
+
+- `X_train.txt` is read into `dtFeaturesTrain`.
+- `y_train.txt` is read into `dtActivityTrain`.
+- `subject_train.txt` is read into `dtSubjectTrain`.
+- `X_test.txt` is read into `dtFeaturesTest`.
+- `y_test.txt` is read into `dtActivityTest`.
+- `subject_test.txt` is read into `dtSubjectTest`.
+- `features.txt` is read into `dtFeaturesNames`.
+- `activity_labels.txt` is read into `activityLabels`.
+- The subjects in training and test set data are merged to form `dtSubject`.
+- The activities in training and test set data are merged to form `dtActivity`.
+- The features of test and training are merged to form `dtFeatures`.
+- The name of the features are set in `features` from `dtFeaturesNames`.
+- `dtFeatures`, `dtActivity` and `dtSubject` are merged to form `completeData`.
+- Indices of columns that contain std or mean, activity and subject are taken into `requiredColumns` .
+- `extractedData` is created with data from columns in `requiredColumns`.
+- `activity` column in `extractedData` is updated with descriptive names of activities taken from `activityLabels`. `activity` column is expressed as a factor variable.
+- Acronyms in variable names in `extractedData` are replaced with descriptive labels.
+- `tidyData` is created as a set with average for each activity and subject of `extractedData`. Entries in `tidyData` are ordered based on activity and subject.
+- Finally, the data in `tidyData` is written into `Tidy.txt`.
+
+##Output Data Set
+
+The output data `Tidy.txt` is a a space-delimited value file. The header line contains the names of the variables. It contains the mean and standard deviation values of the data contained in the input files. The header is restructued in an understandable manner. 
